@@ -7,6 +7,6 @@ namespace AwesomeShopDesignPatterns.API.Infrastructure.Services
 {
     public interface INotificationService
     {
-        void Send(string destination, string content);
+        Task SendAsync(string destination, string content);
     }
 }

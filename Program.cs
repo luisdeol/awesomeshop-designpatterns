@@ -1,8 +1,12 @@
 using AwesomeShopDesignPatterns.API.Infrastructure.Services;
+using SendGrid.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var sendGridApiKey = builder.Configuration.GetSection("SendGridApiKey").Value;
+
+builder.Services.AddSendGrid(o => o.ApiKey = sendGridApiKey);
 
 builder.Services.AddScoped<INotificationFactoryService, NotificationFactoryService>();
 

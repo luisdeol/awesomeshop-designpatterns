@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using AwesomeShopDesignPatterns.API.Infrastructure.Services;
 using AwesomeShopDesignPatterns.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace AwesomeShopDesignPatterns.API.Controllers
 {
@@ -14,16 +16,15 @@ namespace AwesomeShopDesignPatterns.API.Controllers
     {
         private readonly INotificationFactoryService _factory;
 
-        public NotificationsController(INotificationFactoryService factory)
+        public NotificationsController(INotificationFactoryService factory, ISendGridClient sendGridClient)
         {
             _factory = factory;
         }
 
         [HttpPost]
-        public IActionResult Notify(NotificationInputModel model) {
+        public async Task<IActionResult> Notify(NotificationInputModel model) {
             var service = _factory.GetService(model.Type);
-
-            service.Send(model.Destination, model.Content);
+            await service.SendAsync(model.Destination, model.Content);
 
             return Accepted();
         }

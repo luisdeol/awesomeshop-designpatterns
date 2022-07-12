@@ -7,9 +7,11 @@ namespace AwesomeShopDesignPatterns.API.Infrastructure.Services
 {
     public class SmsService : INotificationService
     {
-        public void Send(string destination, string content)
+        public Task SendAsync(string destination, string content)
         {
             Console.WriteLine("SmsService.Send");
+
+            return Task.CompletedTask;
         }
     }
 }
