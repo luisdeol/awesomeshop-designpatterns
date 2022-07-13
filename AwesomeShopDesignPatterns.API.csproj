@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="SendGrid.Extensions.DependencyInjection" Version="1.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
