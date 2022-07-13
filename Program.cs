@@ -1,6 +1,7 @@
 using AwesomeShopDesignPatterns.API.Application;
 using AwesomeShopDesignPatterns.API.Application.NotifyUser;
 using AwesomeShopDesignPatterns.API.Infrastructure.Services;
+using MediatR;
 using SendGrid.Extensions.DependencyInjection;
 using Serilog;
 
@@ -13,10 +14,7 @@ builder.Services.AddSendGrid(o => o.ApiKey = sendGridApiKey);
 
 builder.Services.AddScoped<INotificationFactoryService, NotificationFactoryService>();
 
-builder.Services.AddScoped<NotifyUserCommandHandler>();
-builder.Services.AddScoped<ICommandHandler<NotifyUserCommand, Task>, NotifyUserCommandHandlerDecorator>();
-
-builder.Services.AddScoped<IMediator, Mediator>();
+builder.Services.AddMediatR(typeof(NotifyUserCommand));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

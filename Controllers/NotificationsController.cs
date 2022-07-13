@@ -6,6 +6,7 @@ using AwesomeShopDesignPatterns.API.Application;
 using AwesomeShopDesignPatterns.API.Application.NotifyUser;
 using AwesomeShopDesignPatterns.API.Infrastructure.Services;
 using AwesomeShopDesignPatterns.API.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SendGrid;
 using SendGrid.Helpers.Mail;

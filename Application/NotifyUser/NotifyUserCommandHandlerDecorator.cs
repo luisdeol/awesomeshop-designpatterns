@@ -2,24 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR.Pipeline;
 using Newtonsoft.Json;
 using Serilog;
 
 namespace AwesomeShopDesignPatterns.API.Application.NotifyUser
 {
-    public class NotifyUserCommandHandlerDecorator : ICommandHandler<NotifyUserCommand, Task>
+    public class NotifyUserCommandHandlerDecorator : IRequestPreProcessor<NotifyUserCommand>
     {
-        private readonly NotifyUserCommandHandler _handler;
-        public NotifyUserCommandHandlerDecorator(NotifyUserCommandHandler handler)
+        public Task Process(NotifyUserCommand request, CancellationToken cancellationToken)
         {
-            _handler = handler;
-        }
+            Log.Information($"Handler {request.GetType().Name} was called with command {JsonConvert.SerializeObject(request)}!");
 
-        public async Task Handle(NotifyUserCommand command)
-        {
-            Log.Information($"Handler {command.GetType().Name} was called with command {JsonConvert.SerializeObject(command)}!");
-
-            await _handler.Handle(command);
+            return Task.CompletedTask;
         }
     }
 }
